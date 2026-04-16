@@ -63,7 +63,7 @@
             transform: translate(-50%, -50%);
             z-index: 10000;
             text-align: center;
-            width: 95%; /* Better for mobile */
+            width: 95%;
             transition: opacity 0.8s;
         }
 
@@ -88,7 +88,7 @@
         .is-opened .home-content { opacity: 0; pointer-events: none; }
         .is-opened #invitation-wrapper { visibility: hidden; transition-delay: 1.8s; }
 
-        /* --- MEDALLIONS (PHOTO CIRCLES) --- */
+        /* --- MEDALLIONS --- */
         .medallion-container {
             position: relative;
             display: inline-block;
@@ -102,8 +102,8 @@
         }
 
         .couple-medallion {
-            width: 180px; /* Mobile Friendly */
-            height: 180px;
+            width: 220px; /* Improved mobile size */
+            height: 220px;
             border-radius: 50%;
             border: 3px solid var(--gold);
             object-fit: cover;
@@ -113,8 +113,31 @@
         @media (min-width: 768px) {
             .couple-medallion { width: 280px; height: 280px; border-width: 4px; }
             .open-btn { padding: 15px 45px; font-size: 1rem; }
-            .curtain-left { border-right: 2px double var(--gold); }
-            .curtain-right { border-left: 2px double var(--gold); }
+            .mobile-separator::before, .mobile-separator::after { display: none; }
+        }
+
+        /* --- MOBILE REFINEMENTS --- */
+        .mobile-separator {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .mobile-separator::before,
+        .mobile-separator::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to var(--direction, right), transparent, var(--gold));
+            opacity: 0.5;
+        }
+        .mobile-separator::after { --direction: left; }
+
+        .couple-name-mobile {
+            font-size: 3.5rem;
+            line-height: 1.1;
         }
 
         /* --- GLASS CARDS --- */
@@ -144,25 +167,24 @@
             gap: 8px;
             margin-top: 15px;
             font-size: 0.8rem;
-            transition: 0.3s;
         }
 
         /* --- COUNTDOWN --- */
         #countdown {
             display: flex;
             justify-content: center;
-            gap: 5px;
+            gap: 8px;
             margin: 25px 0;
         }
         .timer-unit {
             background: rgba(212, 175, 55, 0.1);
             border: 1px solid var(--gold);
             padding: 8px 5px;
-            min-width: 60px;
+            min-width: 65px;
             border-radius: 10px;
         }
 
-        /* --- MUSIC TOGGLE --- */
+        /* --- EFFECTS --- */
         #music-toggle {
             position: fixed;
             bottom: 20px;
@@ -172,7 +194,6 @@
             height: 45px;
             background: rgba(212, 175, 55, 0.2);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--gold);
             border-radius: 50%;
             color: var(--gold);
@@ -193,6 +214,13 @@
 
         @keyframes fall {
             to { transform: translateY(110vh) translateX(20px) rotate(360deg); }
+        }
+
+        .exploding-heart {
+            position: fixed;
+            z-index: 10001;
+            pointer-events: none;
+            transition: all 2s ease-out;
         }
     </style>
 </head>
@@ -216,7 +244,7 @@
         <div class="curtain-panel curtain-right"></div>
     </div>
 
-    <div class="container max-w-4xl mx-auto py-10 px-4">
+    <div id="main-invitation" class="container max-w-4xl mx-auto py-10 px-4">
         
         <div class="text-center mb-16" data-aos="fade-up">
             <p class="italic text-gold text-lg mb-2">"Marriage is honourable in all"</p>
@@ -234,23 +262,29 @@
             </div>
         </div>
 
-        <div class="row g-4 align-items-center justify-content-center text-center mb-20">
-            <div class="col-10 col-md-5" data-aos="fade-up">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 mb-20 px-2">
+            <div class="w-full md:w-5/12 text-center" data-aos="fade-up">
                 <div class="medallion-container">
                     <img src="dane - Copy.png" class="couple-medallion" alt="Daniel">
                 </div>
-                <h3 class="font-royal text-4xl md:text-5xl text-gold mt-4">Daniel</h3>
-                <p class="italic opacity-80 max-w-[250px] mx-auto text-xs md:text-sm">"The moment I saw her, I knew my search was over."</p>
+                <h3 class="couple-name-mobile font-royal text-gold mt-4">Daniel</h3>
+                <p class="italic opacity-80 max-w-[280px] mx-auto text-sm leading-relaxed px-4">
+                    "The moment I saw her, I knew my search was over."
+                </p>
             </div>
             
-            <div class="col-12 col-md-2 font-royal text-gold text-5xl md:text-6xl my-2">And</div>
+            <div class="w-full md:w-2/12 mobile-separator" data-aos="zoom-in">
+                <span class="font-royal text-gold text-5xl md:text-6xl px-4">And</span>
+            </div>
             
-            <div class="col-10 col-md-5" data-aos="fade-up">
+            <div class="w-full md:w-5/12 text-center" data-aos="fade-up">
                 <div class="medallion-container" style="animation-delay: -2s;">
                     <img src="beach - Copy.png" class="couple-medallion" alt="Gracy">
                 </div>
-                <h3 class="font-royal text-4xl md:text-5xl text-gold mt-4">Gracy</h3>
-                <p class="italic opacity-80 max-w-[250px] mx-auto text-xs md:text-sm">"In him, I found my love, my best friend, and my home."</p>
+                <h3 class="couple-name-mobile font-royal text-gold mt-4">Gracy</h3>
+                <p class="italic opacity-80 max-w-[280px] mx-auto text-sm leading-relaxed px-4">
+                    "In him, I found my love, my best friend, and my home."
+                </p>
             </div>
         </div>
 
@@ -283,7 +317,7 @@
             <a href="https://share.google/ogkLwpketQK05Z199" target="_blank" class="map-btn">📍 View Map</a>
         </div>
 
-        <footer class="mt-20 text-center pb-10 px-4">
+        <footer id="footer" class="mt-20 text-center pb-10 px-4">
             <div class="h-[1px] w-24 bg-gold mx-auto mb-6 opacity-30"></div>
             <p class="opacity-60 italic text-xs mb-2">"God joined them together, let no man put asunder."</p>
             <p class="text-gold font-royal text-4xl md:text-5xl text-gold-gradient">Waiting for your presence!</p>
@@ -295,17 +329,63 @@
         const audio = document.getElementById('myAudio');
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
+        let autoScrollActive = false;
 
         function startInvitation() {
             audio.volume = 0.4;
             audio.play().catch(e => console.log("Interaction required"));
+            
             document.body.classList.add('is-opened');
             musicToggle.style.display = 'flex';
+
+            for(let i = 0; i < 40; i++) { createHeart(); }
+
             AOS.init({ duration: 1000, once: true });
+            
             setInterval(createSnowflake, 300);
             updateCountdown();
             setInterval(updateCountdown, 1000);
-            window.scrollTo(0,0);
+
+            setTimeout(() => {
+                autoScrollActive = true;
+                requestAnimationFrame(slowScroll);
+            }, 2000);
+        }
+
+        function slowScroll() {
+            if (!autoScrollActive) return;
+            const speed = 0.5;
+            window.scrollBy(0, speed);
+            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+                autoScrollActive = false;
+                return;
+            }
+            requestAnimationFrame(slowScroll);
+        }
+
+        window.addEventListener('wheel', () => autoScrollActive = false);
+        window.addEventListener('touchstart', () => autoScrollActive = false);
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.classList.add('exploding-heart');
+            heart.style.left = '50%';
+            heart.style.top = '50%';
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 400 + 200;
+            const tx = Math.cos(angle) * velocity;
+            const ty = Math.sin(angle) * velocity;
+
+            requestAnimationFrame(() => {
+                heart.style.transform = `translate(${tx}px, ${ty}px) rotate(${Math.random() * 360}deg)`;
+                heart.style.opacity = '0';
+            });
+
+            setTimeout(() => heart.remove(), 2000);
         }
 
         function toggleMusic() {
@@ -320,7 +400,7 @@
 
         function createSnowflake() {
             const snowflake = document.createElement('div');
-            snowflake.innerHTML = '❄';
+            snowflake.innerHTML = '';
             snowflake.classList.add('snowflake');
             snowflake.style.left = Math.random() * 100 + 'vw';
             snowflake.style.animationDuration = Math.random() * 3 + 4 + 's';
