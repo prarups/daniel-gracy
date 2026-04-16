@@ -7,6 +7,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -18,10 +19,7 @@
             --cream: #fffdd0;
         }
 
-        /* CRITICAL: Ensure smooth JS scrolling by disabling CSS smooth scroll */
-        html {
-            scroll-behavior: auto !important;
-        }
+        html { scroll-behavior: auto !important; }
 
         body {
             margin: 0;
@@ -34,7 +32,6 @@
             background-attachment: fixed;
         }
 
-        /* --- SCROLL INDICATOR --- */
         .progress-container {
             position: fixed;
             top: 0;
@@ -58,7 +55,6 @@
             filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
         }
 
-        /* --- ENTRANCE CURTAIN --- */
         #invitation-wrapper {
             position: fixed;
             inset: 0;
@@ -93,7 +89,7 @@
             margin-top: 30px;
             background: linear-gradient(45deg, var(--gold), var(--gold-light));
             color: var(--royal-maroon);
-            padding: 12px 30px;
+            padding: 12px 35px;
             font-size: 0.85rem;
             font-weight: 800;
             text-transform: uppercase;
@@ -103,18 +99,35 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
             transition: 0.4s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            animation: pulse-border 2s infinite;
+        }
+
+        .hand-icon {
+            font-size: 1.4rem;
+            animation: hand-bounce 1s infinite alternate;
+        }
+
+        @keyframes hand-bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
         .is-opened #invitation-wrapper { 
-            visibility: hidden; 
-            pointer-events: none; 
-            transition: visibility 0s 1.8s;
+            visibility: hidden; pointer-events: none; transition: visibility 0s 1.8s;
         }
         .is-opened .curtain-left { transform: translateX(-100%); }
         .is-opened .curtain-right { transform: translateX(100%); }
         .is-opened .home-content { opacity: 0; pointer-events: none; }
 
-        /* --- MEDALLIONS --- */
         .medallion-container {
             position: relative;
             display: inline-block;
@@ -143,17 +156,11 @@
 
         .mobile-separator {
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 1.5rem 0;
+            display: flex; align-items: center; justify-content: center; margin: 1.5rem 0;
         }
 
-        .mobile-separator::before,
-        .mobile-separator::after {
-            content: "";
-            flex: 1;
-            height: 1px;
+        .mobile-separator::before, .mobile-separator::after {
+            content: ""; flex: 1; height: 1px;
             background: linear-gradient(to var(--direction, right), transparent, var(--gold));
             opacity: 0.5;
         }
@@ -175,68 +182,49 @@
 
         .map-btn {
             background: linear-gradient(to right, var(--gold), var(--gold-light));
-            color: #000 !important;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 15px;
-            font-size: 0.8rem;
+            color: #000 !important; font-weight: bold; padding: 10px 20px;
+            border-radius: 50px; text-decoration: none; display: inline-flex;
+            align-items: center; gap: 8px; margin-top: 15px; font-size: 0.8rem;
         }
 
-        #countdown {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 25px 0;
-        }
+        #countdown { display: flex; justify-content: center; gap: 8px; margin: 25px 0; }
         .timer-unit {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--gold);
-            padding: 8px 5px;
-            min-width: 65px;
-            border-radius: 10px;
+            background: rgba(212, 175, 55, 0.1); border: 1px solid var(--gold);
+            padding: 8px 5px; min-width: 65px; border-radius: 10px;
         }
 
         #music-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 10000;
-            width: 45px;
-            height: 45px;
-            background: rgba(212, 175, 55, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--gold);
-            border-radius: 50%;
-            color: var(--gold);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            position: fixed; bottom: 20px; right: 20px; z-index: 10000;
+            width: 45px; height: 45px; background: rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px); border: 1px solid var(--gold);
+            border-radius: 50%; color: var(--gold); display: none;
+            align-items: center; justify-content: center; cursor: pointer;
         }
 
         .snowflake {
-            position: fixed;
-            top: -10%;
-            z-index: 999;
-            pointer-events: none;
-            color: white;
-            animation: fall linear forwards;
+            position: fixed; top: -10%; z-index: 999; pointer-events: none;
+            color: white; animation: fall linear forwards;
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) translateX(20px) rotate(360deg); }
-        }
+        @keyframes fall { to { transform: translateY(110vh) translateX(20px) rotate(360deg); } }
 
         .exploding-heart {
-            position: fixed;
-            z-index: 10001;
-            pointer-events: none;
+            position: fixed; z-index: 10001; pointer-events: none;
             transition: all 2s ease-out;
+        }
+
+        /* --- STRONG MESSAGE STYLING --- */
+        .strong-footer {
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 3rem;
+            margin-top: 4rem;
+        }
+        .quote-line {
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            display: inline-block;
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -259,21 +247,21 @@
         <div class="home-content">
             <h2 class="font-royal text-gold text-2xl md:text-5xl mb-2">You are cordially invited to</h2>
             <h1 class="text-white text-4xl md:text-8xl font-bold mb-4 text-gold-gradient" style="font-family: 'Playfair Display';">Daniel & Gracy</h1>
-            <button class="open-btn" onclick="startInvitation()">Open Invitation</button>
+            <button class="open-btn" onclick="startInvitation()">
+                <span>Open Invitation</span>
+                <i class="bi bi-hand-index-thumb-fill hand-icon"></i>
+            </button>
         </div>
         <div class="curtain-panel curtain-right"></div>
     </div>
 
     <div id="main-invitation" class="container max-w-4xl mx-auto py-10 px-4">
-        
         <div class="text-center mb-16" data-aos="fade-up">
             <p class="italic text-gold text-lg mb-2">"Marriage is honourable in all"</p>
             <p class="uppercase tracking-widest text-[9px] text-gold/60 mb-8">- Hebrews 13:4 -</p>
-            
             <span class="text-gold text-5xl md:text-7xl block mb-2 font-royal">Blessings</span>
             <p class="uppercase tracking-[0.2em] text-[9px] text-gold font-bold mb-6">Together with their Families</p>
             <h2 class="font-royal text-6xl md:text-9xl text-gold-gradient mb-4">Daniel & Gracy</h2>
-            
             <div id="countdown">
                 <div class="timer-unit"><span id="days" class="block text-xl font-bold">00</span><small class="text-[9px]">Days</small></div>
                 <div class="timer-unit"><span id="hours" class="block text-xl font-bold">00</span><small class="text-[9px]">Hrs</small></div>
@@ -284,21 +272,13 @@
 
         <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 mb-20 px-2">
             <div class="w-full md:w-5/12 text-center" data-aos="fade-up">
-                <div class="medallion-container">
-                    <img src="dane - Copy.png" class="couple-medallion" alt="Daniel">
-                </div>
+                <div class="medallion-container"><img src="dane - Copy.png" class="couple-medallion" alt="Daniel"></div>
                 <h3 class="font-royal text-gold text-5xl mt-4">Daniel</h3>
                 <p class="italic opacity-80 max-w-[280px] mx-auto text-sm">"The moment I saw her, I knew my search was over."</p>
             </div>
-            
-            <div class="w-full md:w-2/12 mobile-separator" data-aos="zoom-in">
-                <span class="font-royal text-gold text-5xl px-4">And</span>
-            </div>
-            
+            <div class="w-full md:w-2/12 mobile-separator" data-aos="zoom-in"><span class="font-royal text-gold text-5xl px-4">And</span></div>
             <div class="w-full md:w-5/12 text-center" data-aos="fade-up">
-                <div class="medallion-container" style="animation-delay: -2s;">
-                    <img src="beach - Copy.png" class="couple-medallion" alt="Gracy">
-                </div>
+                <div class="medallion-container" style="animation-delay: -2s;"><img src="beach - Copy.png" class="couple-medallion" alt="Gracy"></div>
                 <h3 class="font-royal text-gold text-5xl mt-4">Gracy</h3>
                 <p class="italic opacity-80 max-w-[280px] mx-auto text-sm">"In him, I found my love, my best friend, and my home."</p>
             </div>
@@ -325,15 +305,20 @@
             <h3 class="font-royal text-5xl text-gold mb-6">The Grand Reception</h3>
             <p class="text-xl font-bold">Viyabarigal Sangam A/C Mahal</p>
             <p class="opacity-80 text-xs mb-4">No: 1/1 Main Road, Kamaraj Nagar, Ennore</p>
-            <div class="inline-block border-y border-gold/30 py-2 px-6">
-                <p class="text-xl font-bold">Starts at 07:00 PM</p>
-            </div>
-            <br>
-            <a href="https://share.google/ogkLwpketQK05Z199" target="_blank" class="map-btn">📍 View Map</a>
+            <div class="inline-block border-y border-gold/30 py-2 px-6"><p class="text-xl font-bold">Starts at 07:00 PM</p></div>
+            <br><a href="https://share.google/ogkLwpketQK05Z199" target="_blank" class="map-btn">📍 View Map</a>
         </div>
 
-        <footer class="mt-20 text-center pb-10">
-            <p class="text-gold font-royal text-5xl text-gold-gradient">Waiting for your presence!</p>
+        <footer class="strong-footer text-center pb-20 px-4" data-aos="fade-up">
+            <div class="quote-line"></div>
+            <h4 class="text-gold-gradient font-bold tracking-[0.3em] uppercase text-xs mb-4">A Promise Forever</h4>
+            <p class="text-white text-xl md:text-3xl font-light italic leading-relaxed max-w-2xl mx-auto">
+                "Two lives, two hearts, joined together in friendship, united forever in love."
+            </p>
+            <p class="text-gold font-royal text-5xl mt-8">Waiting for your presence!</p>
+            <div class="mt-10 opacity-40 text-[10px] uppercase tracking-widest">
+                Daniel & Gracy • 2026
+            </div>
         </footer>
     </div>
 
@@ -343,7 +328,6 @@
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
         const progressBar = document.getElementById("myBar");
-        
         let autoScrollActive = false;
         let currentScrollPos = 0;
 
@@ -360,14 +344,11 @@
             audio.volume = 0.4;
             audio.play().catch(e => console.log("Audio waiting"));
             musicToggle.style.display = 'flex';
-
             for(let i = 0; i < 40; i++) { createHeart(); }
             AOS.init({ duration: 1000, once: true });
             setInterval(createSnowflake, 300);
             updateCountdown();
             setInterval(updateCountdown, 1000);
-
-            // Set the initial position and start the smooth scroll
             setTimeout(() => {
                 currentScrollPos = window.pageYOffset;
                 autoScrollActive = true;
@@ -375,49 +356,30 @@
             }, 2000);
         }
 
-        // SMOOTH SCROLL ENGINE
         function slowScroll() {
             if (!autoScrollActive) return;
-
-            // Increment position by 1.5
             currentScrollPos += 1.5; 
-            
-            // Move the window instantly to the new calculated position
-            window.scrollTo({
-                top: currentScrollPos,
-                behavior: 'instant'
-            });
-
-            // Calculate distance to bottom
+            window.scrollTo({ top: currentScrollPos, behavior: 'instant' });
             const totalHeight = document.documentElement.scrollHeight;
-            const distanceToBottom = totalHeight - (window.innerHeight + window.pageYOffset);
-
-            // Stop if at the bottom
-            if (distanceToBottom <= 1) {
-                autoScrollActive = false;
-                return;
+            if (totalHeight - (window.innerHeight + window.pageYOffset) <= 1) {
+                autoScrollActive = false; return;
             }
-
             requestAnimationFrame(slowScroll);
         }
 
-        // Interrupt auto-scroll if user interacts
         window.addEventListener('wheel', () => autoScrollActive = false);
         window.addEventListener('touchstart', () => autoScrollActive = false);
         window.addEventListener('mousedown', () => autoScrollActive = false);
 
         function createHeart() {
             const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.classList.add('exploding-heart');
-            heart.style.left = '50%';
-            heart.style.top = '50%';
+            heart.innerHTML = '❤️'; heart.classList.add('exploding-heart');
+            heart.style.left = '50%'; heart.style.top = '50%';
             heart.style.fontSize = Math.random() * 20 + 15 + 'px';
             document.body.appendChild(heart);
             const angle = Math.random() * Math.PI * 2;
             const velocity = Math.random() * 400 + 200;
-            const tx = Math.cos(angle) * velocity;
-            const ty = Math.sin(angle) * velocity;
+            const tx = Math.cos(angle) * velocity; const ty = Math.sin(angle) * velocity;
             requestAnimationFrame(() => {
                 heart.style.transform = `translate(${tx}px, ${ty}px) rotate(${Math.random() * 360}deg)`;
                 heart.style.opacity = '0';
@@ -426,19 +388,13 @@
         }
 
         function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                musicIcon.innerText = '🔊';
-            } else {
-                audio.pause();
-                musicIcon.innerText = '🔇';
-            }
+            if (audio.paused) { audio.play(); musicIcon.innerText = '🔊'; } 
+            else { audio.pause(); musicIcon.innerText = '🔇'; }
         }
 
         function createSnowflake() {
             const snowflake = document.createElement('div');
-            snowflake.innerHTML = '';
-            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = ''; snowflake.classList.add('snowflake');
             snowflake.style.left = Math.random() * 100 + 'vw';
             snowflake.style.animationDuration = Math.random() * 3 + 4 + 's';
             snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
