@@ -18,6 +18,11 @@
             --cream: #fffdd0;
         }
 
+        /* CRITICAL: Ensure smooth JS scrolling by disabling CSS smooth scroll */
+        html {
+            scroll-behavior: auto !important;
+        }
+
         body {
             margin: 0;
             background-color: var(--royal-maroon);
@@ -44,7 +49,6 @@
             background: linear-gradient(to right, var(--gold), var(--gold-light));
             width: 0%;
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-            transition: width 0.1s ease-out;
         }
 
         .text-gold-gradient {
@@ -61,7 +65,6 @@
             z-index: 9999;
             display: flex;
             background: #000;
-            transition: visibility 0s 1.8s;
         }
 
         .curtain-panel {
@@ -102,14 +105,14 @@
             transition: 0.4s;
         }
 
-        /* FIX: Ensure content is clickable after opening */
         .is-opened #invitation-wrapper { 
             visibility: hidden; 
             pointer-events: none; 
+            transition: visibility 0s 1.8s;
         }
         .is-opened .curtain-left { transform: translateX(-100%); }
         .is-opened .curtain-right { transform: translateX(100%); }
-        .is-opened .home-content { opacity: 0; }
+        .is-opened .home-content { opacity: 0; pointer-events: none; }
 
         /* --- MEDALLIONS --- */
         .medallion-container {
@@ -138,7 +141,6 @@
             .open-btn { padding: 15px 45px; font-size: 1rem; }
         }
 
-        /* --- MOBILE REFINEMENTS --- */
         .mobile-separator {
             position: relative;
             display: flex;
@@ -156,11 +158,6 @@
             opacity: 0.5;
         }
         .mobile-separator::after { --direction: left; }
-
-        .couple-name-mobile {
-            font-size: 3.5rem;
-            line-height: 1.1;
-        }
 
         .glass-panel {
             background: rgba(255, 255, 255, 0.05);
@@ -188,8 +185,6 @@
             gap: 8px;
             margin-top: 15px;
             font-size: 0.8rem;
-            position: relative;
-            z-index: 10;
         }
 
         #countdown {
@@ -292,29 +287,25 @@
                 <div class="medallion-container">
                     <img src="dane - Copy.png" class="couple-medallion" alt="Daniel">
                 </div>
-                <h3 class="couple-name-mobile font-royal text-gold mt-4">Daniel</h3>
-                <p class="italic opacity-80 max-w-[280px] mx-auto text-sm leading-relaxed px-4">
-                    "The moment I saw her, I knew my search was over."
-                </p>
+                <h3 class="font-royal text-gold text-5xl mt-4">Daniel</h3>
+                <p class="italic opacity-80 max-w-[280px] mx-auto text-sm">"The moment I saw her, I knew my search was over."</p>
             </div>
             
             <div class="w-full md:w-2/12 mobile-separator" data-aos="zoom-in">
-                <span class="font-royal text-gold text-5xl md:text-6xl px-4">And</span>
+                <span class="font-royal text-gold text-5xl px-4">And</span>
             </div>
             
             <div class="w-full md:w-5/12 text-center" data-aos="fade-up">
                 <div class="medallion-container" style="animation-delay: -2s;">
                     <img src="beach - Copy.png" class="couple-medallion" alt="Gracy">
                 </div>
-                <h3 class="couple-name-mobile font-royal text-gold mt-4">Gracy</h3>
-                <p class="italic opacity-80 max-w-[280px] mx-auto text-sm leading-relaxed px-4">
-                    "In him, I found my love, my best friend, and my home."
-                </p>
+                <h3 class="font-royal text-gold text-5xl mt-4">Gracy</h3>
+                <p class="italic opacity-80 max-w-[280px] mx-auto text-sm">"In him, I found my love, my best friend, and my home."</p>
             </div>
         </div>
 
         <div class="glass-panel text-center" data-aos="zoom-in">
-            <h3 class="font-royal text-5xl md:text-6xl text-gold mb-6">The Holy Matrimony</h3>
+            <h3 class="font-royal text-5xl text-gold mb-6">The Holy Matrimony</h3>
             <div class="row g-4">
                 <div class="col-12 col-md-6 md:border-end border-gold/20">
                     <p class="text-gold font-bold uppercase tracking-widest text-[10px] mb-2">Date & Time</p>
@@ -331,21 +322,18 @@
         </div>
 
         <div class="glass-panel text-center" data-aos="zoom-in">
-            <h3 class="font-royal text-5xl md:text-6xl text-gold mb-6">The Grand Reception</h3>
-            <p class="text-xl font-bold px-4">Viyabarigal Sangam A/C Mahal</p>
+            <h3 class="font-royal text-5xl text-gold mb-6">The Grand Reception</h3>
+            <p class="text-xl font-bold">Viyabarigal Sangam A/C Mahal</p>
             <p class="opacity-80 text-xs mb-4">No: 1/1 Main Road, Kamaraj Nagar, Ennore</p>
-            <div class="inline-block border-y border-gold/30 py-2 px-6 mb-4">
-                <p class="text-gold font-bold uppercase tracking-widest text-[9px] mb-1">Dinner Ceremony</p>
+            <div class="inline-block border-y border-gold/30 py-2 px-6">
                 <p class="text-xl font-bold">Starts at 07:00 PM</p>
             </div>
             <br>
             <a href="https://share.google/ogkLwpketQK05Z199" target="_blank" class="map-btn">📍 View Map</a>
         </div>
 
-        <footer id="footer" class="mt-20 text-center pb-10 px-4">
-            <div class="h-[1px] w-24 bg-gold mx-auto mb-6 opacity-30"></div>
-            <p class="opacity-60 italic text-xs mb-2">"God joined them together, let no man put asunder."</p>
-            <p class="text-gold font-royal text-4xl md:text-5xl text-gold-gradient">Waiting for your presence!</p>
+        <footer class="mt-20 text-center pb-10">
+            <p class="text-gold font-royal text-5xl text-gold-gradient">Waiting for your presence!</p>
         </footer>
     </div>
 
@@ -355,59 +343,68 @@
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
         const progressBar = document.getElementById("myBar");
+        
         let autoScrollActive = false;
+        let currentScrollPos = 0;
 
         window.onscroll = function() { updateProgressBar() };
         function updateProgressBar() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let winScroll = window.pageYOffset || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
             if(progressBar) progressBar.style.width = scrolled + "%";
         }
 
         function startInvitation() {
-            // Volume adjustment
-            audio.volume = 0.4;
-            
-            // Visual opening
             document.body.classList.add('is-opened');
-            
-            // Attempt music playback
-            audio.play().catch(e => console.log("Audio waiting for user interaction"));
-            
-            // Show music button
+            audio.volume = 0.4;
+            audio.play().catch(e => console.log("Audio waiting"));
             musicToggle.style.display = 'flex';
 
-            // Start Effects
             for(let i = 0; i < 40; i++) { createHeart(); }
             AOS.init({ duration: 1000, once: true });
             setInterval(createSnowflake, 300);
-            
-            // Countdown
             updateCountdown();
             setInterval(updateCountdown, 1000);
 
-            // Auto Scroll
+            // Set the initial position and start the smooth scroll
             setTimeout(() => {
+                currentScrollPos = window.pageYOffset;
                 autoScrollActive = true;
                 requestAnimationFrame(slowScroll);
             }, 2000);
         }
 
+        // SMOOTH SCROLL ENGINE
         function slowScroll() {
             if (!autoScrollActive) return;
-            const speed = 1.5; 
-            window.scrollBy(0, speed);
-            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+
+            // Increment position by 1.5
+            currentScrollPos += 1.5; 
+            
+            // Move the window instantly to the new calculated position
+            window.scrollTo({
+                top: currentScrollPos,
+                behavior: 'instant'
+            });
+
+            // Calculate distance to bottom
+            const totalHeight = document.documentElement.scrollHeight;
+            const distanceToBottom = totalHeight - (window.innerHeight + window.pageYOffset);
+
+            // Stop if at the bottom
+            if (distanceToBottom <= 1) {
                 autoScrollActive = false;
                 return;
             }
+
             requestAnimationFrame(slowScroll);
         }
 
-        // Cancel auto-scroll on interaction
+        // Interrupt auto-scroll if user interacts
         window.addEventListener('wheel', () => autoScrollActive = false);
         window.addEventListener('touchstart', () => autoScrollActive = false);
+        window.addEventListener('mousedown', () => autoScrollActive = false);
 
         function createHeart() {
             const heart = document.createElement('div');
